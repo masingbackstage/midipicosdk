@@ -8,6 +8,8 @@ LED::LED(uint pin1, uint pin2)
     gpio_set_dir(pin1, GPIO_OUT);
     gpio_init(pin2);
     gpio_set_dir(pin2, GPIO_OUT);
+    gpio_put(pin1, 1);
+    gpio_put(pin2, 0);
 };
 
 

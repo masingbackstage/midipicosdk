@@ -11,16 +11,14 @@ Button::Button(uint pin, uint pinLED1, uint pinLED2)
 
 
 void Button::update(){
-        if(gpio_get(pin) && wasPressed){
+        if(gpio_get(pin) && !wasPressed){
                 shortBounceMS = get_absolute_time() + shortDurationMS;
                 longBounceMS = get_absolute_time() + longDurationMS;
         }
         if (get_absolute_time() > longBounceMS && !gpio_get(pin))
                 longPressed();
-
         else if (get_absolute_time() > shortBounceMS && !gpio_get(pin))
                 shortPressed();
-
         wasPressed = gpio_get(pin);
 };
 
