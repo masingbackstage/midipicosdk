@@ -8,23 +8,41 @@ Button::Button(uint pin, uint pinLED1, uint pinLED2)
     gpio_init(pin);
     gpio_set_dir(pin, GPIO_IN);
 }
+void Button::update() {
+    static bool lastButtonState = false;
+    static bool buttonPressed = false;
+    static absolute_time_t pressStartTime;
+    static absolute_time_t lastDebounceTime = get_absolute_time();
+    const uint debounceDelay = 50;
+    const uint longPressThreshold = 1000;
 
+    bool currentButtonState = gpio_get(pin);
 
-void Button::update(){
-        if(gpio_get(pin) && !wasPressed){
-                shortBounceMS = get_absolute_time() + shortDurationMS;
-                longBounceMS = get_absolute_time() + longDurationMS;
-        }
-        if (get_absolute_time() > longBounceMS && !gpio_get(pin))
+    if (currentButtonState != lastButtonState) {
+        lastDebounceTime = get_absolute_time();
+    }
+
+    if (absolute_time_diff_us(lastDebounceTime, get_absolute_time()) > debounceDelay * 1000) {
+        if (currentButtonState && !buttonPressed) {
+            buttonPressed = true;
+            pressStartTime = get_absolute_time();
+        } 
+        else if (!currentButtonState && buttonPressed) {
+            buttonPressed = false;
+            uint64_t pressDuration = absolute_time_diff_us(pressStartTime, get_absolute_time()) / 1000;
+            if (pressDuration >= longPressThreshold) {
                 longPressed();
-        else if (get_absolute_time() > shortBounceMS && !gpio_get(pin))
+            } else {
                 shortPressed();
-        wasPressed = gpio_get(pin);
-};
+            }
+        }
+    }
 
+    lastButtonState = currentButtonState;
+}
 
 void Button::longPressed(){
-        //led.longPress();
+        led.longPress();
 };
 
 void Button::shortPressed(){

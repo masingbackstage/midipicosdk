@@ -14,13 +14,9 @@ LED::LED(uint pin1, uint pin2)
 
 
 void LED::shortPress(){
-    if(gpio_get(pin1)){
-        gpio_put(pin1, 0);
-        gpio_put(pin2, 1);
-    }else{
-        gpio_put(pin1, 1);
-        gpio_put(pin2, 0);
-    }
+    bool newState = !gpio_get(pin1);
+    gpio_put(pin1, newState);
+    gpio_put(pin2, !newState);
 };
 
 void LED::longPress(){
