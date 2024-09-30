@@ -2,13 +2,16 @@
 class Button{
     private:
         uint pin;
+
         uint pinLED1;
         uint pinLED2;
-
         LED led;
 
+        uint8_t longNote;
+        uint8_t shortNote;
+
     public:
-        Button(uint pin, uint pinLED1, uint pinLED2);
+        Button(uint pin, uint pinLED1, uint pinLED2, uint8_t longNote, uint8_t shortNote);
 
         void update();
 
