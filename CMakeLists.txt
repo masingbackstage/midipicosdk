@@ -63,7 +63,7 @@ target_sources(midick PUBLIC
 target_link_libraries(
         midick
         pico_stdlib
-        pico_unique_id 
+        pico_unique_id
         tinyusb_device 
         tinyusb_board
         )
