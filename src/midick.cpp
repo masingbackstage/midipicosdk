@@ -9,11 +9,19 @@ int main() {
     board_init();
     tusb_init();
 
-    Button button1(5, 14, 15, 90, 80);
+    Button buttons[] = {
+                        Button(5, 14, 15, 1, 2),
+                        Button(6, 16, 17, 3, 4),
+                        Button(7, 18, 19, 5, 6),
+                        Button(8, 20, 21, 7, 8)
+                        };
+
 
     while (true) {
-        tud_task();          
-        button1.update();
-        button1.led.update();
+        tud_task();
+        for(int i = 0; i < sizeof(buttons) / sizeof(buttons[0]); i++)
+        {
+            buttons[i].update();
+        }
     }
 }
