@@ -40,24 +40,39 @@ pico_sdk_init()
 
 add_executable(midick src/midick.cpp 
                include/led.h src/led.cpp
-               include/button.h src/button.cpp)
+               include/button.h src/button.cpp
+               tusb_config.h
+               usb_descriptors.c
+               )
 
 pico_set_program_name(midick "midick")
 pico_set_program_version(midick "0.1")
 
+
 # Modify the below lines to enable/disable output over UART/USB
 pico_enable_stdio_uart(midick 0)
-pico_enable_stdio_usb(midick 0)
+pico_enable_stdio_usb(midick 1)  # Zmienione na 1, aby włączyć USB
+
+
+target_sources(midick PUBLIC
+        ${CMAKE_CURRENT_LIST_DIR}/src/midick.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/usb_descriptors.c
+        )
 
 # Add the standard library to the build
-target_link_libraries(midick
-        pico_stdlib)
+target_link_libraries(
+        midick
+        pico_stdlib
+        pico_unique_id 
+        tinyusb_device 
+        tinyusb_board
+        )
 
 # Add the standard include files to the build
 target_include_directories(midick PRIVATE
-  ${CMAKE_CURRENT_LIST_DIR}
-  ${CMAKE_CURRENT_LIST_DIR}/.. # for our common lwipopts or any other standard includes, if required
-)
+        ${CMAKE_CURRENT_LIST_DIR}
+        ${CMAKE_CURRENT_LIST_DIR}/.. # for our common lwipopts or any other standard includes, if required
+        ${PICO_SDK_PATH}/lib/tinyusb/src 
+        )
 
 pico_add_extra_outputs(midick)
-
