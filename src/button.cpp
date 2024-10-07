@@ -52,6 +52,7 @@ void Button::longPressed(){
         msg[2] = 127;                     // Velocity
         tud_midi_n_stream_write(0, 0, msg, 3);
         sendUartMsg(msg);
+
         // Send Note Off for previous note.
         msg[0] = 0x80;                    // Note Off - Channel 1
         msg[1] = longNote;                // Note Number
@@ -68,6 +69,7 @@ void Button::shortPressed(){
         msg[2] = 127;                     // Velocity
         tud_midi_n_stream_write(0, 0, msg, 3);
         sendUartMsg(msg);
+        
         // Send Note Off for previous note.
         msg[0] = 0x80;                    // Note Off - Channel 1
         msg[1] = shortNote;               // Note Number
