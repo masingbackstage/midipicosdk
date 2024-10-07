@@ -10,10 +10,10 @@ int main() {
     tusb_init();
 
     Button buttons[] = {
-                        Button(5, 14, 15, 1, 2),
-                        Button(6, 16, 17, 3, 4),
-                        Button(7, 18, 19, 5, 6),
-                        Button(8, 20, 21, 7, 8)
+                        Button(2, 16, 17, 1, 2),
+                        Button(3, 18, 19, 3, 4),
+                        Button(4, 20, 21, 5, 6),
+                        Button(5, 26, 27, 7, 8)
                         };
 
 
