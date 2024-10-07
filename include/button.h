@@ -19,4 +19,5 @@ class Button{
         void update();
         void shortPressed();
         void longPressed();
+        void sendUartMsg(uint8_t msg[3]);
 };
