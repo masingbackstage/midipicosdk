@@ -6,8 +6,8 @@ class Button{
         uint pinLED2;
         LED led;
 
-        uint8_t longNote;
-        uint8_t shortNote;
+        uint8_t longProgram;
+        uint8_t shortProgram;
 
         bool lastButtonState;
         bool buttonPressed;
@@ -15,7 +15,7 @@ class Button{
         absolute_time_t lastDebounceTime;
 
     public:
-        Button(uint pin, uint pinLED1, uint pinLED2, uint8_t longNote, uint8_t shortNote);
+        Button(uint pin, uint pinLED1, uint pinLED2, uint8_t longProgram, uint8_t shortProgram);
         void update();
         void shortPressed();
         void longPressed();

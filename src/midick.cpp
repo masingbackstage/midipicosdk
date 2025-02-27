@@ -12,17 +12,16 @@ int main() {
     gpio_set_function(0, GPIO_FUNC_UART);
 
     Button buttons[] = {
-                        Button(2, 14, 15, 1, 2),
-                        Button(3, 16, 17, 3, 4),
-                        Button(4, 20, 21, 5, 6),
-                        Button(5, 26, 27, 7, 8)
+                        Button(2, 14, 15, 4, 0),
+                        Button(3, 16, 17, 5, 1),
+                        Button(4, 20, 21, 6, 2),
+                        Button(5, 26, 27, 7, 3)
                         };
 
     
     while (true) {
         tud_task();
-        for(int i = 0; i < sizeof(buttons) / sizeof(buttons[0]); i++)
-        {
+        for(int i = 0; i < sizeof(buttons) / sizeof(buttons[0]); i++) {
             buttons[i].update();
         }
     }
