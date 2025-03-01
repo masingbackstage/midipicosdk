@@ -18,4 +18,6 @@ public:
 
     void update();
 
+    void setPins(bool first, bool second);
+
 };

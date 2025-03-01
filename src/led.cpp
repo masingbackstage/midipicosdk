@@ -25,6 +25,11 @@ void LED::longPress(){
     lastState = gpio_get(pin1);
 }
 
+void LED::setPins(bool first, bool second) {
+    gpio_put(pin1, first);
+    gpio_put(pin2, second);
+}
+
 void LED::update(){
     if (isBlinking) {
         if (absolute_time_diff_us(lastBlinkTime, get_absolute_time()) >= blinkInterval * 1000) {
