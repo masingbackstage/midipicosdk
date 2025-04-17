@@ -49,9 +49,7 @@ pico_set_program_name(midick "midick")
 pico_set_program_version(midick "0.1")
 
 
-# Modify the below lines to enable/disable output over UART/USB
-pico_enable_stdio_uart(midick 0)
-pico_enable_stdio_usb(midick 1)  # Zmienione na 1, aby włączyć USB
+
 
 
 target_sources(midick PUBLIC
@@ -75,5 +73,11 @@ target_include_directories(midick PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}/.. # for our common lwipopts or any other standard includes, if required
         ${PICO_SDK_PATH}/lib/tinyusb/src 
         )
+        
+# Modify the below lines to enable/disable output over UART/USB
+pico_enable_stdio_usb(midick 1)
+pico_enable_stdio_uart(midick 0)
+
+
 
 pico_add_extra_outputs(midick)

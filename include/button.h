@@ -31,5 +31,7 @@ class Button{
 
         bool updateCortex();
 
+        bool updatePullIn();
+
         bool getPin();
 };
